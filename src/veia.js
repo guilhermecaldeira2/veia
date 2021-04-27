@@ -130,7 +130,11 @@ function JogoDaVeia() {
   function Quadrado({ quadrado }) {
     const { selecionado, id } = quadrado;
     return (
-      <button onClick={() => verificaClick(id)} className="quadrado">
+      <button
+        disabled={selecionado !== 0}
+        onClick={() => verificaClick(id)}
+        className="quadrado"
+      >
         {selecionado === 0 ? "" : selecionado === 1 ? "❌" : "⭕"}
       </button>
     );
@@ -147,16 +151,17 @@ function JogoDaVeia() {
         {matriz.map((linha, i) => (
           <Linha key={i}>
             {linha.map((quadrado) => (
-              <Quadrado
-                key={quadrado.id}
-                quadrado={quadrado}
-                player={{ contador, setContador }}
-                jogo={{ matriz, setMatriz }}
-              />
+              <Quadrado key={quadrado.id} quadrado={quadrado} />
             ))}
           </Linha>
         ))}
       </div>
+      <button
+        className="jogar-novamente"
+        onClick={() => window.location.reload()}
+      >
+        Jogar novamente
+      </button>
     </div>
   );
 }
